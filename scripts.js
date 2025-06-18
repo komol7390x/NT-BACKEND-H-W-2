@@ -16,5 +16,3 @@ async function res() {
     // info.getInfo()
 }
 res();
-
-
