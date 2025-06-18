@@ -15,6 +15,6 @@ async function res() {
     // await sleep(random(100, 1000))
     // info.getInfo()
 }
-res()
+res();
 
 
