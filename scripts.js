@@ -18,11 +18,3 @@ async function res() {
 res()
 
 
-
-
-
-
-// console.log(random(100,999));
-const info = new Person('Komol', 27);
-// info.getInfo()
-
