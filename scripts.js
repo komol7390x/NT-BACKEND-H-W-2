@@ -1,4 +1,6 @@
-const { sleep, random, Person } = require("./child");
+const { sleep } = require("./sleep");
+const { random } = require("./random");
+const {  Person } = require("./person");
 async function res() {
     // -------------------------------------------
     // Task-1
@@ -12,7 +14,7 @@ async function res() {
     // info.getInfo()
     // -------------------------------------------
     // Task-4
-    // await sleep(random(100, 1000))
-    // info.getInfo()
+    await sleep(random(100, 1000))
+    info.getInfo()
 }
-res()
+res();
