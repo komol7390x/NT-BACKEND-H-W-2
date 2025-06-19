@@ -14,7 +14,7 @@ async function res() {
     // info.getInfo()
     // -------------------------------------------
     // Task-4
-    await sleep(random(100, 1000))
+    // await sleep(random(100, 1000));
     info.getInfo()
 }
 res();
