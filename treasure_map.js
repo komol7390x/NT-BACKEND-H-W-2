@@ -1,23 +1,32 @@
-const fs = require('fs');
-// const path = require('path');
-// const baseFolder = path.join(__dirname, 'treasure_hunt');
-// const files = {
-//     'map.txt': "Xaritani o'rganing va yo'lingizni toping!",
-//     'clue1.txt': "Siz to'g'ri yo'ldasiz! Lekin quyosh botadigan tomonni unutmang!",
-//     'clue2.txt': "Jangchi yuragiga ega bo'ling! Xazina yaqin!",
-//     'treasure.txt': "Tabriklaymiz! Siz xazinani topdingiz!"
-// };
-// function createTreasureHunt() {
-//     if (!fs.existsSync(baseFolder)) {
-//         fs.mkdirSync(baseFolder);
-//         console.log('Papkasi yaratildi:', baseFolder);
-//     }
-//     for (const [fileName, content] of Object.entries(files)) {
-//         const filePath = path.join(baseFolder, fileName);
-//         fs.writeFileSync(filePath, content, 'utf-8');
-//         console.log(`Fayl yaratildi: ${fileName}`);
-//     }
-//     console.log('Xazina xaritasi tayyor!');
-// }
-// createTreasureHunt();
+const fs = require('node:fs');
+const path = require('node:path');
 
+const treaFolder = path.join(__dirname, 'treasure_hunt');
+const obj = {
+    cave: { 'map.txt': "Xaritani o'rganing va yo'lingiznitoping!" },
+    forest: { "clue1.txt": "Siz to'g'ri yo'ldasiz! Lekin quyoshbotadigan tomonni unutmang!" },
+    desert: { 'clue2.txt': "Jangchi yuragiga ega bo'ling! Xazinayaqin!" },
+    hidden_temple: { 'treasure.txt': "Tabriklaymiz! Siz xazinanitopdingiz!" }
+}
+
+function createFolder() {
+    if (!fs.existsSync(treaFolder)) {
+        fs.mkdirSync(treaFolder)
+        console.log(treaFolder, " papka yaratildi");
+    }
+    for (let [key, val] of Object.entries(obj)) {
+        const folder = key;
+        const file = Object.keys(val);
+        const text = Object.values(val)
+        const folderPath = path.join(treaFolder, folder);
+
+        fs.mkdirSync(folderPath, { recursive: true })
+
+        file.forEach((file, index) => {
+            const filePath = path.join(folderPath, file);
+            fs.writeFileSync(filePath, text[index], 'utf-8');
+        });
+    }
+    console.log('Papkalar tayor');
+}
+createFolder()
