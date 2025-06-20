@@ -27,11 +27,10 @@ function createFolder() {
 }
 
 function readFolder() {
-    const trea = path.join(__dirname, 'treasure_hunt');
-    const folder = fs.readdirSync(trea);
+    const folder = fs.readdirSync(treaFolder);
 
     folder.forEach(item => {
-        const folderPath = path.join(trea, item);
+        const folderPath = path.join(treaFolder, item);
         if (fs.lstatSync(folderPath).isDirectory()) {
             const files = fs.readdirSync(folderPath)
             files.forEach(value => {
@@ -44,5 +43,5 @@ function readFolder() {
 }
 
 
-// createFolder()
-// readFolder()
+createFolder()
+readFolder()
