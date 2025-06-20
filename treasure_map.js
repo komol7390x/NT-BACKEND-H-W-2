@@ -8,24 +8,20 @@ const obj = {
     desert: { 'clue2.txt': "Jangchi yuragiga ega bo'ling! Xazinayaqin!" },
     hidden_temple: { 'treasure.txt': "Tabriklaymiz! Siz xazinanitopdingiz!" }
 }
-
 function createFolder() {
     if (!fs.existsSync(treaFolder)) {
         fs.mkdirSync(treaFolder)
         console.log(treaFolder, " papka yaratildi");
     }
+
     for (let [key, val] of Object.entries(obj)) {
-        const folder = key;
-        const file = Object.keys(val);
-        const text = Object.values(val)
-        const folderPath = path.join(treaFolder, folder);
+        const folderPath = path.join(treaFolder, key);
+        fs.mkdirSync(folderPath, { recursive: true });
 
-        fs.mkdirSync(folderPath, { recursive: true })
-
-        file.forEach((file, index) => {
-            const filePath = path.join(folderPath, file);
-            fs.writeFileSync(filePath, text[index], 'utf-8');
-        });
+        for (let [file, text] of Object.entries(val)) {
+            const lastFolder = path.join(folderPath, file);
+            fs.writeFileSync(lastFolder, text, 'utf-8');
+        }
     }
     console.log('Papkalar tayor');
 }
