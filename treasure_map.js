@@ -3,10 +3,10 @@ const path = require('node:path');
 
 const treaFolder = path.join(__dirname, 'treasure_hunt');
 const obj = {
-    cave: { 'map.txt': "Xaritani o'rganing va yo'lingiznitoping!" },
-    forest: { "clue1.txt": "Siz to'g'ri yo'ldasiz! Lekin quyoshbotadigan tomonni unutmang!" },
+    cave: { 'map.txt': "Xaritani o'rganing va yo'lingizni toping!" },
+    forest: { "clue1.txt": "Siz to'g'ri yo'ldasiz! Lekin quyosh botadigan tomonni unutmang!" },
     desert: { 'clue2.txt': "Jangchi yuragiga ega bo'ling! Xazinayaqin!" },
-    hidden_temple: { 'treasure.txt': "Tabriklaymiz! Siz xazinanitopdingiz!" }
+    hidden_temple: { 'treasure.txt': "Tabriklaymiz! Siz xazinani topdingiz!" }
 }
 function createFolder() {
     if (!fs.existsSync(treaFolder)) {
@@ -25,4 +25,24 @@ function createFolder() {
     }
     console.log('Papkalar tayor');
 }
-createFolder()
+
+function readFolder() {
+    const trea = path.join(__dirname, 'treasure_hunt');
+    const folder = fs.readdirSync(trea);
+
+    folder.forEach(item => {
+        const folderPath = path.join(trea, item);
+        if (fs.lstatSync(folderPath).isDirectory()) {
+            const files = fs.readdirSync(folderPath)
+            files.forEach(value => {
+                const filePath = path.join(folderPath, value);
+                const read = fs.readFileSync(filePath, 'utf-8');
+                console.log(`Papka nomi: ${item}\nFile nomi: ${files}\nXabar: ${read}\n--------------------`);
+            })
+        }
+    })
+}
+
+
+// createFolder()
+readFolder()
