@@ -63,5 +63,5 @@ class Text {
     }
 }
 const text = new Text();
-// text.moreWords();
+text.moreWords();
 // text.noTryWord()
