@@ -30,7 +30,6 @@ function createFolder() {
     }
 
 }
-
 function readFolder() {
     try {
         const folder = fs.readdirSync(treaFolder);

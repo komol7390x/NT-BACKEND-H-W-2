@@ -1,5 +1,4 @@
 const fs = require('node:fs').promises;
-const { error } = require('node:console');
 const path = require('node:path');
 const dir = path.join(__dirname, 'text.txt');
 
@@ -65,4 +64,4 @@ class Text {
 }
 const text = new Text();
 // text.moreWords();
-text.noTryWord()
+// text.noTryWord()
