@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "name": "apple",
+    "color": "red"
+  },
+  {
+    "id": 2,
+    "name": "banana",
+    "color": "yellow"
+  },
+  {
+    "id": 3,
+    "name": "grape",
+    "color": "purple"
+  },
+  {
+    "id": 4,
+    "name": "orange",
+    "color": "orange"
+  },
+  {
+    "id": 5,
+    "name": "kiwi",
+    "color": "green"
+  },
+  {
+    "id": 6,
+    "name": "blueberry",
+    "color": "blue"
+  },
+  {
+    "id": 7,
+    "name": "watermelon",
+    "color": "green-red"
+  },
+  {
+    "id": 8,
+    "name": "mango",
+    "color": "orange-yellow"
+  },
+  {
+    "id": 9,
+    "name": "lemon",
+    "color": "yellow"
+  },
+  {
+    "id": 10,
+    "name": "pomegranate",
+    "color": "dark red"
+  }
+]
