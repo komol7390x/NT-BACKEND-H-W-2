@@ -37,5 +37,5 @@ const server=createServer(async(req,res)=>{
     }
 
 })
-
-server.listen(3002,()=>console.log('Server is running 3002 port'))
+const PORT=3001
+server.listen(3002,()=>console.log(`Server is running ${PORT} port`))
