@@ -47,7 +47,7 @@ const server = createServer(async (req, res) => {
             let read = await readFromFile();
             id = url.split('/')[3]
             const index = read.findIndex(res => res.id === +id);
-            if (user == -1) {
+            if (index == -1) {
                 res.writeHead(404, { 'content-type': 'application:json' });
                 return es.end(JSON.stringify({
                     statuCode: 404,
