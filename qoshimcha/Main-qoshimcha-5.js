@@ -1,5 +1,5 @@
 const { createServer } = require('node:http');
-const { writeToFile, readFromFile } = require('./file5-2');
+const { writeToFile, readFromFile } = require('./qoshimcha-5-2');
 const { log } = require('node:console');
 
 const server = createServer(async (req, res) => {
