@@ -5,19 +5,9 @@
     "color": "black"
   },
   {
-    "id": 2,
-    "name": "Toyota",
-    "color": "white"
-  },
-  {
-    "id": 3,
-    "name": "Mercedes",
-    "color": "silver"
-  },
-  {
-    "id": 4,
-    "name": "Audi",
-    "color": "gray"
+    "id": 1,
+    "name": "Honda",
+    "color": "maroon"
   },
   {
     "id": 5,
@@ -48,5 +38,15 @@
     "id": 10,
     "name": "Honda",
     "color": "maroon"
+  },
+  {
+    "id": 11,
+    "name": "Mercedes",
+    "color": "silver"
+  },
+  {
+    "id": 12,
+    "name": "Toyota",
+    "color": "white"
   }
 ]

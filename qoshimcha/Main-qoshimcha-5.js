@@ -48,7 +48,7 @@ const server = createServer(async (req, res) => {
             const index = read.findIndex(res => res.id === +id);
             if (index == -1) {
                 res.writeHead(404, { 'content-type': 'application:json' });
-                return es.end(JSON.stringify({
+                return res.end(JSON.stringify({
                     statuCode: 404,
                     message: `Not found Users: ${id}`
                 }))
