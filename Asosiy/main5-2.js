@@ -2,7 +2,9 @@ const {createServer}=require('node:http');
 const {writeToFile,readFromFile}=require('./file5-2');
 
 const server=createServer(async(req,res)=>{
-    if(req.method=='POST' && req.url=='/country'){
+    const method=req.method
+    const url=req.url
+    if(method=='POST' && req.url=='/country'){
         let body=''
         req.on('data',chunk=>{
             body+=chunk
@@ -24,15 +26,15 @@ const server=createServer(async(req,res)=>{
         })
     }
 
-    if(req.method=="GET" && req.url=='/'){
+    if(method=="GET" && req.url=='/country'){
 
     }
 
-    if(req.method=="PUSH" && req.url=='/country/id/'){
+    if(method=="PUSH" && req.url=='/country/id/'){
 
     }
 
-    if(req.method=='DELETE' && req.url=='/country/id/'){
+    if(method=='DELETE' && req.url=='/country/id/'){
 
     }
 
