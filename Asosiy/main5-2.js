@@ -41,7 +41,7 @@ const server = createServer(async (req, res) => {
     if (method == "PUT" && url.startsWith('/country/id/')) {
         let body = '';
         req.on('data', (chunk) => {
-            body += chunk.toString();
+            body += chunk.toString()
         })
         req.on('end', async () => {
             let read = await readFromFile();
@@ -54,26 +54,46 @@ const server = createServer(async (req, res) => {
                     message: `Not found Users: ${id}`
                 }))
             }
-            const updateUser={id:index,...JSON.parse(body)}
-            read[index]=updateUser
+            const updateUser = { id: index, ...JSON.parse(body) }
+            read[index] = updateUser
             await writeToFile(read)
-            res.writeHead(200,{ 'content-type': 'application:json' })
+            res.writeHead(200, { 'content-type': 'application:json' })
             return res.end(
                 JSON.stringify({
-                    statusCode:200,
+                    statusCode: 200,
                     message: 'Done',
                     data: updateUser
                 })
             )
-
         })
 
     }
     //DELETE
     if (method == 'DELETE' && url == '/country/id/') {
-
+        req.on('end', async () => {
+            let read = await readFromFile();
+            id = url.split('/')[3]
+            const index = read.findIndex(res => res.id === +id);
+            if (index == -1) {
+                res.writeHead(404, { 'content-type': 'application:json' });
+                return es.end(JSON.stringify({
+                    statuCode: 404,
+                    message: `Not found Users: ${id}`
+                }))
+            }
+            read.splice(index, 1);
+            await writeToFile(read)
+            res.writeHead(200, { 'content-type': 'application:json' })
+            return res.end(
+                JSON.stringify({
+                    statusCode: 200,
+                    message: 'Done',
+                    data: updateUser
+                })
+            )
+        })
     }
 
 })
-const PORT = 3001
-server.listen(3002, () => console.log(`Server is running ${PORT} port`))
+const PORT = 3002
+server.listen(PORT, () => console.log(`Server is running ${PORT} port`))
