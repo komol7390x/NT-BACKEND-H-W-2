@@ -1,52 +1,52 @@
 [
   {
     "id": 1,
-    "name": "apple",
-    "color": "red"
+    "name": "BMW",
+    "color": "black"
   },
   {
     "id": 2,
-    "name": "banana",
-    "color": "yellow"
+    "name": "Toyota",
+    "color": "white"
   },
   {
     "id": 3,
-    "name": "grape",
-    "color": "purple"
+    "name": "Mercedes",
+    "color": "silver"
   },
   {
     "id": 4,
-    "name": "orange",
-    "color": "orange"
+    "name": "Audi",
+    "color": "gray"
   },
   {
     "id": 5,
-    "name": "kiwi",
-    "color": "green"
-  },
-  {
-    "id": 6,
-    "name": "blueberry",
+    "name": "Chevrolet",
     "color": "blue"
   },
   {
+    "id": 6,
+    "name": "Ford",
+    "color": "red"
+  },
+  {
     "id": 7,
-    "name": "watermelon",
-    "color": "green-red"
+    "name": "Tesla",
+    "color": "pearl white"
   },
   {
     "id": 8,
-    "name": "mango",
-    "color": "orange-yellow"
-  },
-  {
-    "id": 9,
-    "name": "lemon",
+    "name": "Lamborghini",
     "color": "yellow"
   },
   {
+    "id": 9,
+    "name": "Porsche",
+    "color": "dark gray"
+  },
+  {
     "id": 10,
-    "name": "pomegranate",
-    "color": "dark red"
+    "name": "Honda",
+    "color": "maroon"
   }
 ]

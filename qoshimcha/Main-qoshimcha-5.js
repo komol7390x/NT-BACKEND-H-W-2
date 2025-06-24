@@ -1,12 +1,11 @@
 const { createServer } = require('node:http');
 const { writeToFile, readFromFile } = require('./qoshimcha-5-2');
-const { log } = require('node:console');
 
 const server = createServer(async (req, res) => {
     const method = req.method
     const url = req.url
     //CREATE
-    if (method == 'POST' && url == '/fruits') {
+    if (method == 'POST' && url == '/cars') {
         let body = ''
         req.on('data', chunk => {
             body += chunk
@@ -28,7 +27,7 @@ const server = createServer(async (req, res) => {
         })
     }
     //READ
-    if (method == "GET" && url == '/fruits') {
+    if (method == "GET" && url == '/cars') {
         let read = await readFromFile();
         res.writeHead(200, { 'content-type': 'application:json' });
         res.end(JSON.stringify({
@@ -38,7 +37,7 @@ const server = createServer(async (req, res) => {
         }))
     }
     //UPDATE
-    if (method == "PUT" && url.startsWith('/fruits/id/')) {
+    if (method == "PUT" && url.startsWith('/cars/id/')) {
         let body = '';
         req.on('data', (chunk) => {
             body += chunk.toString()
@@ -69,7 +68,7 @@ const server = createServer(async (req, res) => {
 
     }
     //DELETE
-    if (method == 'DELETE' && url.startsWith('/fruits/id')) {
+    if (method == 'DELETE' && url.startsWith('/cars/id')) {
         console.log(method);
         let read = await readFromFile();
         id = url.split('/')[3]
@@ -93,5 +92,5 @@ const server = createServer(async (req, res) => {
         )
     }
 })
-const PORT = 3002
+const PORT = 3003
 server.listen(PORT, () => console.log(`Server is running ${PORT} port`))
