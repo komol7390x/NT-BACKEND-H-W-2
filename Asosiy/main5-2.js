@@ -4,7 +4,7 @@ const {writeToFile,readFromFile}=require('./file5-2');
 const server=createServer(async(req,res)=>{
     const method=req.method
     const url=req.url
-    if(method=='POST' && req.url=='/country'){
+    if(method=='POST' && url=='/country'){
         let body=''
         req.on('data',chunk=>{
             body+=chunk
@@ -26,15 +26,21 @@ const server=createServer(async(req,res)=>{
         })
     }
 
-    if(method=="GET" && req.url=='/country'){
+    if(method=="GET" && url=='/country'){
+        let read=await readFromFile();
+        res.writeHead(200,{'content-type':'application:json'});
+            res.end(JSON.stringify({
+                statuCode:200,
+                message:'Done',
+                data:read
+            }))
+    }
+
+    if(method=="PUSH" && url=='/country/id/'){
 
     }
 
-    if(method=="PUSH" && req.url=='/country/id/'){
-
-    }
-
-    if(method=='DELETE' && req.url=='/country/id/'){
+    if(method=='DELETE' && url=='/country/id/'){
 
     }
 
