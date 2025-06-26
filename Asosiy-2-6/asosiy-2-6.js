@@ -1,48 +1,123 @@
-const {createServer}=require('http');
-const {existsSync,mkdirSync,rename,createReadStream,createWriteStream}=require('fs');
-const {join,extname}=require('path');
-const {formidable}=require('formidable');
-const {checkImages,checkVideos}=require('./checkFormat')
+const { createServer } = require('http');
+const { existsSync, mkdirSync, rename, createReadStream, createWriteStream } = require('fs');
+const { join, extname } = require('path');
+const { formidable } = require('formidable');
+const { checkImages, checkVideos } = require('./checkFormat')
 
-const PORT=3002;
+const PORT = 3002;
 // ---------------------------------------------------------------------------------------
 // FUNKSIYALAR
-const checkFolder=(item)=>{
-    if(!existsSync(item)){
-        mkdirSync(item,{recursive:true})
+const checkFolder = async (item) => {
+    if (!existsSync(item)) {
+        mkdirSync(item, { recursive: true })
     }
-}
-const formiDable=function(uploadDir,size){
-    formidable({
-        uploadDir:uploadDir,
-        keepExtensions:true,
-        maxFileSize:size*1024*1024
-    })
 }
 // ---------------------------------------------------------------------------------------
 // FOLDER
-const uploadsFolder=join(__dirname,'uploads');
-checkFolder(uploadsFolder)
+const uploadsFolder = join(__dirname, 'uploads');
 // ---------------------------------------------------------------------------------------
 // BODY
-const server=createServer(async(req,res)=>{
-    const method=req.method;
-    const url=req.url
-    if(method=='POST' && url.startsWith('/uploads')){
-        if(url==('/uploads/images')){
-            const imageFolder=join(uploadsFolder,'images');
-            checkFolder(imageFolder)
-            const form=formiDable(imageFolder,20)
-        }else if(url==('/uploads/videos')){
+const server = createServer(async (req, res) => {
+    const method = req.method;
+    const url = req.url;
+    await checkFolder(uploadsFolder)
+    // ---------------------------------------------------------------------------------------
+    // UPLOADS
+    if (method === 'POST' && url === '/uploads') {
+        const form = formidable({
+            uploadDir: uploadsFolder,
+            keepExtensions: true,
+            maxFileSize: 20 * 1024 * 1024   //File sizeni berdik
+        });
+        form.parse(req, (err, _, files) => {
+            if (err) {
+                res.writeHead(500, { "content-type": "application/json" });
+                return res.end(JSON.stringify({
+                    statusCode: 500,
+                    message: err.message || 'Error on uploading file'
+                }));
+            }
 
-        }else{
-            res.writeHead(404,{"content-type":"application/json"});
+            const file = files['']?.[0];                                //FILE aniqlab oldik
+            const ext = extname(file.originalFilename).toLowerCase();       //File nomini
+            let folderType = ''
+            console.log(ext);
+
+            if (checkImages(ext) != -1) {       //File Formatini topib shu papkaga Downlaod qivomiza
+                folderType = join(uploadsFolder, 'images');
+            } else if (checkVideos(ext) != -1) {
+                folderType = join(uploadsFolder, 'videos');
+            } else {
+                folderType = join(uploadsFolder, 'unknown')
+            }
+            checkFolder(folderType);
+
+            const data = new Date();
+            const time = `${data.toISOString()}_${file.originalFilename}`;
+            const newFilePath = join(folderType, time);
+
+            rename(file.filepath, newFilePath, (err) => {
+                if (err) {
+                    res.writeHead(500, { "content-type": "application/json" });
+                    return res.end(JSON.stringify({
+                        statusCode: 500,
+                        error: {
+                            message: err.message || 'Error on renaming file'
+                        }
+                    }));
+                }
+
+                res.writeHead(201, { "content-type": "application/json" })
+                return res.end(JSON.stringify({
+                    statusCode: 2012,
+                    message: 'success',
+                    data: time,
+                    folder: folderType
+                }));
+            });
+        });
+    }
+    // ---------------------------------------------------------------------------------------
+    // GET  
+    if (method == 'GET' && url.startsWith('/media')) {
+        let miniTypes = '';
+        let fileName = '';
+        if (url.startsWith('/media/images')) {
+            miniTypes = decodeURIComponent(url.replace('/media/images/', ''));
+            const image = join(uploadsFolder, 'images')
+            fileName = join(image, miniTypes)
+
+        } else if (url.startsWith('/media/videos')) {
+            miniTypes = decodeURIComponent(url.replace('/media/videos/', ''));
+            const video = join(uploadsFolder, 'videos')
+            fileName = join(video, miniTypes)
+
+        } else {
+            res.writeHead(404, { "content-type": "application/json" });
             return res.end(JSON.stringify({
-                statusCode:404,
-                message:'Not found this page :('
-            }))
+                statusCode: 404,
+                message: 'Not found this page :('
+            }));
+        }
+        if (!existsSync(fileName)) {
+            res.writeHead(404, { "content-type": "application/json" });
+            return res.end(JSON.stringify({
+                statusCode: 404,
+                error: {
+                    message: 'File not found'
+                }
+            }));
         }
     }
-})
 
-server.listen(PORT,()=>console.log(`Server is running ${PORT}`))
+    else {
+        res.writeHead(404, { "content-type": "application/json" });
+        return res.end(JSON.stringify({
+            statusCode: 404,
+            message: 'Not found this page :('
+        }));
+    }
+});
+
+
+server.listen(PORT, () => console.log(`Server is running ${PORT}`))
