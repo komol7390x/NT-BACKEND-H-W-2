@@ -29,6 +29,7 @@ const server = createServer(async (req, res) => {
             keepExtensions: true,
             maxFileSize: 20 * 1024 * 1024   //File sizeni berdik
         });
+
         form.parse(req, (err, _, files) => {
             if (err) {
                 res.writeHead(500, { "content-type": "application/json" });
@@ -40,16 +41,14 @@ const server = createServer(async (req, res) => {
 
             const file = files['']?.[0];                                //FILE aniqlab oldik
             const ext = extname(file.originalFilename).toLowerCase();       //File nomini
-            let folderType = ''
-            console.log(ext);
+            let folderType = join(uploadsFolder, 'unknown');
 
             if (checkImages(ext) != -1) {       //File Formatini topib shu papkaga Downlaod qivomiza
                 folderType = join(uploadsFolder, 'images');
             } else if (checkVideos(ext) != -1) {
                 folderType = join(uploadsFolder, 'videos');
-            } else {
-                folderType = join(uploadsFolder, 'unknown')
             }
+
             checkFolder(folderType);
 
             const data = new Date();
@@ -67,47 +66,19 @@ const server = createServer(async (req, res) => {
                     }));
                 }
 
-                res.writeHead(201, { "content-type": "application/json" })
+                res.writeHead(201, { "content-type": "application/json" });
                 return res.end(JSON.stringify({
-                    statusCode: 2012,
+                    statusCode: 201,
                     message: 'success',
-                    data: time,
-                    folder: folderType
+                    data: time
                 }));
             });
         });
     }
     // ---------------------------------------------------------------------------------------
     // GET  
-    if (method == 'GET' && url.startsWith('/media')) {
-        let miniTypes = '';
-        let fileName = '';
-        if (url.startsWith('/media/images')) {
-            miniTypes = decodeURIComponent(url.replace('/media/images/', ''));
-            const image = join(uploadsFolder, 'images')
-            fileName = join(image, miniTypes)
+    else if (method == 'GET' && url.startsWith('/media')) {
 
-        } else if (url.startsWith('/media/videos')) {
-            miniTypes = decodeURIComponent(url.replace('/media/videos/', ''));
-            const video = join(uploadsFolder, 'videos')
-            fileName = join(video, miniTypes)
-
-        } else {
-            res.writeHead(404, { "content-type": "application/json" });
-            return res.end(JSON.stringify({
-                statusCode: 404,
-                message: 'Not found this page :('
-            }));
-        }
-        if (!existsSync(fileName)) {
-            res.writeHead(404, { "content-type": "application/json" });
-            return res.end(JSON.stringify({
-                statusCode: 404,
-                error: {
-                    message: 'File not found'
-                }
-            }));
-        }
     }
 
     else {
