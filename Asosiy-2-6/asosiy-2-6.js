@@ -78,7 +78,34 @@ const server = createServer(async (req, res) => {
     // ---------------------------------------------------------------------------------------
     // GET  
     else if (method == 'GET' && url.startsWith('/media')) {
+        let miniTypes = '';
+        let fileName = '';
+        if (url.startsWith('/media/images')) {
+            miniTypes = decodeURIComponent(url.replace('/media/images/', ''));
+            const image = join(uploadsFolder, 'images')
+            fileName = join(image, miniTypes)
 
+        } else if (url.startsWith('/media/videos')) {
+            miniTypes = decodeURIComponent(url.replace('/media/videos/', ''));
+            const video = join(uploadsFolder, 'videos')
+            fileName = join(video, miniTypes)
+
+        } else {
+            res.writeHead(404, { "content-type": "application/json" });
+            return res.end(JSON.stringify({
+                statusCode: 404,
+                message: 'Not found this page :('
+            }));
+        }
+        if (!existsSync(fileName)) {
+            res.writeHead(404, { "content-type": "application/json" });
+            return res.end(JSON.stringify({
+                statusCode: 404,
+                error: {
+                    message: 'File not found'
+                }
+            }));
+        }
     }
 
     else {
