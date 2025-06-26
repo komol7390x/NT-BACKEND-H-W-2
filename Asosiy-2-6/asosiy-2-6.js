@@ -80,16 +80,18 @@ const server = createServer(async (req, res) => {
     else if (method == 'GET' && url.startsWith('/media')) {
         let miniTypes = '';
         let fileName = '';
+        let ext = ''
         if (url.startsWith('/media/images')) {
             miniTypes = decodeURIComponent(url.replace('/media/images/', ''));
             const image = join(uploadsFolder, 'images')
             fileName = join(image, miniTypes)
+            ext = checkImages(`.${miniTypes.split('.').at(-1)}`)
 
         } else if (url.startsWith('/media/videos')) {
             miniTypes = decodeURIComponent(url.replace('/media/videos/', ''));
             const video = join(uploadsFolder, 'videos')
             fileName = join(video, miniTypes)
-
+            ext = checkVideos(`.${miniTypes.split('.').at(-1)}`)
         } else {
             res.writeHead(404, { "content-type": "application/json" });
             return res.end(JSON.stringify({
@@ -106,6 +108,11 @@ const server = createServer(async (req, res) => {
                 }
             }));
         }
+
+        const contentType = ext || 'application/octect-stream';
+        res.writeHead(200, { "content-type": contentType });
+        const strem = createReadStream(fileName);
+        strem.pipe(res)
     }
 
     else {
@@ -118,4 +125,4 @@ const server = createServer(async (req, res) => {
 });
 
 
-server.listen(PORT, () => console.log(`Server is running ${PORT}`))
+server.listen(PORT, () => console.log(`Server is running ${PORT}`));
