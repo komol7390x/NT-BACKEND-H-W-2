@@ -55,7 +55,7 @@ const server = createServer(async (req, res) => {
             const time = `${data.toISOString()}_${file.originalFilename}`;
             const newFilePath = join(folderType, time);
 
-            rename(file.filepath, newFilePath, (err) => {
+            rename(file.filepath, newFilePath, (err) => {             //File qayta nomlavomiza
                 if (err) {
                     res.writeHead(500, { "content-type": "application/json" });
                     return res.end(JSON.stringify({
@@ -66,7 +66,7 @@ const server = createServer(async (req, res) => {
                     }));
                 }
 
-                res.writeHead(201, { "content-type": "application/json" });
+                res.writeHead(201, { "content-type": "application/json" });   //Hammasi yaxshi ishlasa 201 qaytradi
                 return res.end(JSON.stringify({
                     statusCode: 201,
                     message: 'success',
