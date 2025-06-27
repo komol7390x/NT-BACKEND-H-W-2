@@ -1,5 +1,5 @@
 const { createServer } = require('http');
-const { existsSync, mkdirSync, rename, createReadStream, writeFileSync, readdirSync } = require('fs');
+const { existsSync, mkdirSync, rename, createReadStream,readdirSync,statSync } = require('fs');
 const { join, extname } = require('path');
 const { formidable } = require('formidable');
 const { checkImages, checkVideos } = require('./checkFormat')
@@ -120,18 +120,15 @@ const server = createServer(async (req, res) => {
     }
     // ---------------------------------------------------------------------------------------
     // GET
-    else if (method == 'GET' && url == '/gallery') {
-        // uploads papkadagi subfolderlarni olish
+    else if (method == 'GET' && url.startsWith('/gallery')) {
+        let items = [];
         const subfolders = readdirSync(uploadsFolder).filter(name => {
             const fullPath = join(uploadsFolder, name);
             return statSync(fullPath).isDirectory();
         });
-
-        // Har bir subfolderdagi fayllarni yig‘ish
         subfolders.forEach(folder => {
             const folderPath = join(uploadsFolder, folder);
             const files = readdirSync(folderPath);
-
             files.forEach(file => {
                 const ext = extname(file).toLowerCase();
                 let type = 'other';
@@ -141,7 +138,6 @@ const server = createServer(async (req, res) => {
                 } else if (checkVideos(ext)!=-1) {
                     type = 'video';
                 }
-
                 items.push({
                     name: file,
                     type: type,
