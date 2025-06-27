@@ -1,5 +1,5 @@
 const { createServer } = require('http');
-const { existsSync, mkdirSync, rename, createReadStream,writeFileSync } = require('fs');
+const { existsSync, mkdirSync, rename, createReadStream, writeFileSync, readdirSync } = require('fs');
 const { join, extname } = require('path');
 const { formidable } = require('formidable');
 const { checkImages, checkVideos } = require('./checkFormat')
@@ -8,7 +8,6 @@ const PORT = 3002;
 // ---------------------------------------------------------------------------------------
 // FOLDER
 const uploadsFolder = join(__dirname, 'uploads');
-let jsonFile=''
 // ---------------------------------------------------------------------------------------
 // FUNKSIYALAR
 const checkFolder = async (item) => {
@@ -16,10 +15,10 @@ const checkFolder = async (item) => {
         mkdirSync(item, { recursive: true })
     }
 }
-const jsonFileWrite=async()=>{
+const jsonFileWrite = async () => {
     const jsonFolder = join(uploadsFolder, 'jsonFolder');
     await checkFolder(jsonFolder)
-    jsonFile = join(jsonFolder, 'jsonFile.json');
+    let jsonFile = join(jsonFolder, 'jsonFile.json');
     writeFileSync(jsonFile, '[]');
 }
 // ---------------------------------------------------------------------------------------
@@ -120,10 +119,12 @@ const server = createServer(async (req, res) => {
         strem.pipe(res)
     }
     // ---------------------------------------------------------------------------------------
-    // 
-    else if(method=='GET' && url=='/gallery'){
-
+    // GET
+    else if (method == 'GET' && url == '/gallery') {
+        
     }
+    // ---------------------------------------------------------------------------------------
+    // ELSE
     else {
         res.writeHead(404, { "content-type": "application/json" });
         return res.end(JSON.stringify({
