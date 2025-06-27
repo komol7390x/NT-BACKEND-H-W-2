@@ -1,10 +1,14 @@
 const { createServer } = require('http');
-const { existsSync, mkdirSync, rename, createReadStream, createWriteStream } = require('fs');
+const { existsSync, mkdirSync, rename, createReadStream,writeFileSync } = require('fs');
 const { join, extname } = require('path');
 const { formidable } = require('formidable');
 const { checkImages, checkVideos } = require('./checkFormat')
 
 const PORT = 3002;
+// ---------------------------------------------------------------------------------------
+// FOLDER
+const uploadsFolder = join(__dirname, 'uploads');
+let jsonFile=''
 // ---------------------------------------------------------------------------------------
 // FUNKSIYALAR
 const checkFolder = async (item) => {
@@ -12,15 +16,19 @@ const checkFolder = async (item) => {
         mkdirSync(item, { recursive: true })
     }
 }
-// ---------------------------------------------------------------------------------------
-// FOLDER
-const uploadsFolder = join(__dirname, 'uploads');
+const jsonFileWrite=async()=>{
+    const jsonFolder = join(uploadsFolder, 'jsonFolder');
+    await checkFolder(jsonFolder)
+    jsonFile = join(jsonFolder, 'jsonFile.json');
+    writeFileSync(jsonFile, '[]');
+}
 // ---------------------------------------------------------------------------------------
 // BODY
 const server = createServer(async (req, res) => {
     const method = req.method;
     const url = req.url;
     await checkFolder(uploadsFolder)
+    await jsonFileWrite()
     // ---------------------------------------------------------------------------------------
     // UPLOADS
     if (method === 'POST' && url === '/uploads') {
@@ -29,7 +37,6 @@ const server = createServer(async (req, res) => {
             keepExtensions: true,
             maxFileSize: 20 * 1024 * 1024   //File sizeni berdik
         });
-
         form.parse(req, (err, _, files) => {
             if (err) {
                 res.writeHead(500, { "content-type": "application/json" });
@@ -48,9 +55,7 @@ const server = createServer(async (req, res) => {
             } else if (checkVideos(ext) != -1) {
                 folderType = join(uploadsFolder, 'videos');
             }
-
             checkFolder(folderType);
-
             const data = new Date();
             const time = `${data.toISOString()}_${file.originalFilename}`;
             const newFilePath = join(folderType, time);
@@ -114,7 +119,11 @@ const server = createServer(async (req, res) => {
         const strem = createReadStream(fileName);
         strem.pipe(res)
     }
+    // ---------------------------------------------------------------------------------------
+    // 
+    else if(method=='GET' && url=='/gallery'){
 
+    }
     else {
         res.writeHead(404, { "content-type": "application/json" });
         return res.end(JSON.stringify({
@@ -123,6 +132,4 @@ const server = createServer(async (req, res) => {
         }));
     }
 });
-
-
 server.listen(PORT, () => console.log(`Server is running ${PORT}`));

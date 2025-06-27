@@ -1,5 +1,4 @@
 function checkVideos(item){
-    item=item.toLowerCase()
     const videosTypes={
         '.mp4': 'video/mp4',
     }
