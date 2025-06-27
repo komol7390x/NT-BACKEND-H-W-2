@@ -1,0 +1,12 @@
+{
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch server-8.js"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
