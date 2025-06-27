@@ -9,15 +9,16 @@ const pathFolder = path.join(__dirname, '../','project_folder')
 const jsonFile=path.join(pathFolder,'data.json')
 // --------------------------------------------------------------
 // WRITE
-export const write = async (data) => {
-    if(!existsSync(jsonFile)){
-         writeFile(jsonFile, '[]');
-    }
-    writeFile(jsonFile,JSON.stringify(data,2,null))
+export const write = async (data) => {    
+  await writeFile(jsonFile,JSON.stringify(data, null, 2)
+  );
 }
 // --------------------------------------------------------------
 //READ
 export const read = async () => {
+    if (!existsSync(jsonFile)) {
+    await writeFile(jsonFile, '[]');
+  }
     const data=await readFile(jsonFile,'utf-8')
     return JSON.parse(data)
 }
