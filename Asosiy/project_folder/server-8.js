@@ -35,9 +35,24 @@ app.get('/', async (req, res) => {
             message: readFile
         })
     } catch (error) {
-        if(error){
+        if (error) {
             res.status(500).json({
-                message:error.message||'Internal server error'
+                message: error.message || 'Internal server error'
+            })
+        }
+    }
+})
+// ----------------------------------------------------------------
+//GET BY ID
+app.get('/:id', async (req, res) => {
+    try {
+        id = +req.params.id
+        const users = await read()
+
+    } catch (error) {
+        if (error) {
+            res.status(500).json({
+                message: error.message || 'Internal server error'
             })
         }
     }
