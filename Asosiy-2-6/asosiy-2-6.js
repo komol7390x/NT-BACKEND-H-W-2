@@ -121,7 +121,36 @@ const server = createServer(async (req, res) => {
     // ---------------------------------------------------------------------------------------
     // GET
     else if (method == 'GET' && url == '/gallery') {
-        
+        // uploads papkadagi subfolderlarni olish
+        const subfolders = readdirSync(uploadsFolder).filter(name => {
+            const fullPath = join(uploadsFolder, name);
+            return statSync(fullPath).isDirectory();
+        });
+
+        // Har bir subfolderdagi fayllarni yig‘ish
+        subfolders.forEach(folder => {
+            const folderPath = join(uploadsFolder, folder);
+            const files = readdirSync(folderPath);
+
+            files.forEach(file => {
+                const ext = extname(file).toLowerCase();
+                let type = 'other';
+
+                if (checkImages(ext)!=-1) {
+                    type = 'image';
+                } else if (checkVideos(ext)!=-1) {
+                    type = 'video';
+                }
+
+                items.push({
+                    name: file,
+                    type: type,
+                    url: `/uploads/${folder}/${file}`
+                });
+            });
+        });
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ gallery: items }));
     }
     // ---------------------------------------------------------------------------------------
     // ELSE
