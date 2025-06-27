@@ -80,7 +80,7 @@ app.put('/:id', async (req, res) => {
         users[index] = { id, ...req.body };
         write(users);
         return res.status(200).json({
-            messag: users[index]
+            message: users[index]
         })
     } catch (error) {
         if (error) {
@@ -90,6 +90,30 @@ app.put('/:id', async (req, res) => {
         }
     }
 })
-
+// ----------------------------------------------------------------
+//DELETE
+app.delete('/:id', async (req, res) => {
+    try {
+        const id = +req.params.id;
+        const users = await read();
+        const index = users.findIndex(res => res.id == id);
+        if (index === -1) {
+            return res.status(404).json({
+                messag: 'Not found user :('
+            })
+        }
+        users.splice(index, 1)
+        write(users);
+        return res.status(200).json({
+            message: `delete id ${id}`
+        })
+    } catch (error) {
+        if (error) {
+            res.status(500).json({
+                message: error.message || 'Internal server error'
+            })
+        }
+    }
+})
 const PORT = 3002
 app.listen(PORT, () => console.log(`Server is running ${PORT}`));
