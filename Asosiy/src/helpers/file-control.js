@@ -16,5 +16,3 @@ export const read = async () => {
     const data = await readFile(filePath, 'utf-8')
     return JSON.parse(data)
 }
-
-// read().then(res => console.log(res))
