@@ -3,19 +3,18 @@ import { writeFile, readFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs'
 
 const filePath = resolve('../../', 'users.json');
-const filePath2 = resolve('../../', 'usersr.txt');
-
 const checkFile = async (item) => {
-    if (!existsSync(filePath)) {
-        writeFile(filePath, '[]')
+    if (!existsSync(item)) {
+        writeFile(item, '[]')
     }
 }
 export const write = async (data) => {
     await writeFile(filePath, JSON.stringify(data, null, 2));
 }
 export const read = async () => {
-    await checkFile(filePath2)
+    await checkFile(filePath)
     const data = await readFile(filePath, 'utf-8')
     return JSON.parse(data)
 }
-const res = checkFile().then(res => console.log(res))
+
+// read().then(res => console.log(res))

@@ -18,7 +18,10 @@ const addUser = async (req, res) => {
     }
 }
 const getAllUsers = async (req, res) => {
-
+    const users = await read();
+    return res.status(200).json({
+        data: users
+    })
 }
 
 const getUserById = async (req, res) => {
