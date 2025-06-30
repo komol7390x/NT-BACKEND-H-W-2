@@ -7,10 +7,10 @@ wss.on('listening', () => console.log('serveris runing 3003'));
 wss.on('connection', (ws, res) => {
     console.log('client is connection');
 
-    const userName = res.headers['sec-websocket-protocol'];
+    const userName = res.headers['Sec-WebSocket-Protocol'];
     console.log('bu server', userName);
 
-    const id = Math.random().toString(36).slice(2)
+    const id = Math.random().toString(36).slice(2);
     userId.add(id);
     ws.send(JSON.stringify({ id, user: userName }))
 
@@ -19,6 +19,8 @@ wss.on('connection', (ws, res) => {
 
         wss.clients.forEach(client => {
             client.send(JSON.stringify({ id, user: userName, ...clientMessage }))
+            console.log(JSON.parse(clientMessage));
+
         })
     })
 })

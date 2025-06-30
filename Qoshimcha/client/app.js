@@ -18,12 +18,11 @@ socket.onopen = function () {
 }
 
 socket.onmessage = function (event) {
-    const serverMessage = JSON.stringify(event.data);
+    const serverMessage = JSON.parse(event.data);
     if (!user) {
         user = serverMessage
     }
     if (user.id != serverMessage?.id) {
-        console.log(serverMessage);
-
+        console.log(serverMessage)
     }
 }
