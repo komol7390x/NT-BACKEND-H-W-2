@@ -29,4 +29,4 @@ INSERT INTO(name,age,group_name) VALUE
   ('Javohir', 23, 'Group C'),
   ('Dilnoza', 18, 'Group B');
 
-SELECT * FROM STUDENTS
+SELECT name,age,group_name FROM STUDENTS
