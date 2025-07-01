@@ -93,7 +93,7 @@ GROUP BY Customers.id;
 
 SELECT
     Customers.full_name,
-    Menu.name AS dish_name,
+    Menu.name AS Meal,
     Menu.price,
     Order_Items.quantity,
     (Menu.price * Order_Items.quantity) AS total_cost
