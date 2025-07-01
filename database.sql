@@ -8,9 +8,10 @@ CREATE TABLE IF NOT EXISTS Customers(
 );
 CREATE TABLE IF NOT EXISTS Orders(
     id INT AUTO_INCREMENT PRIMARY KEY,
-    FOREIGN KEY (id) REFERENCES Customers(id),
+    customer_id INT,
     order_data DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     total_price DECIMAL(10,2) NOT NULL
+    FOREIGN KEY (customer_id) REFERENCES Customers(id),
 );
 
 CREATE TABLE IF NOT EXISTS Menu(
@@ -21,7 +22,9 @@ CREATE TABLE IF NOT EXISTS Menu(
 
 CREATE TABLE IF NOT EXISTS Order_Items(
     id INT AUTO_INCREMENT PRIMARY KEY,
-    FOREIGN KEY (id) REFERENCES Orders(id),
-    FOREIGN KEY (id) REFERENCES Menu(id),
+    order_id INT,
+    menu_id INT,
+    FOREIGN KEY (order_id) REFERENCES Orders(id),
+    FOREIGN KEY (menu_id) REFERENCES Menu(id),
     quantity INT
 );
