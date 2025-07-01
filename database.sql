@@ -1,17 +1,17 @@
-CREATE DATABASE IF NOW EXISTS Restoran;
+CREATE DATABASE IF NOT EXISTS Restoran;
 USE Restoran;
 
 CREATE TABLE IF NOT EXISTS Customers(
     id INT AUTO_INCREMENT PRIMARY KEY,
     full_name VARCHAR(100),
-    phone VARCHAR (15) UNIQUE,
+    phone VARCHAR (15) UNIQUE
 );
 CREATE TABLE IF NOT EXISTS Orders(
     id INT AUTO_INCREMENT PRIMARY KEY,
-    customer_id INT,
     order_data DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    total_price DECIMAL(10,2) NOT NULL
-    FOREIGN KEY (customer_id) REFERENCES Customers(id),
+    total_price DECIMAL(10,2) NOT NULL,
+    customer_id INT,
+    FOREIGN KEY (customer_id) REFERENCES Customers(id)
 );
 
 CREATE TABLE IF NOT EXISTS Menu(
@@ -28,3 +28,38 @@ CREATE TABLE IF NOT EXISTS Order_Items(
     FOREIGN KEY (menu_id) REFERENCES Menu(id),
     quantity INT
 );
+
+INSERT INTO Customers(full_name,phone) VALUE
+('Jamshid','+998998881155'),
+('Aziz', '+998901234567'),
+('Gulnora', '+998933456789'),
+('Dilshod', '+998977654321'),
+('Malika', '+998935551122');
+
+INSERT INTO Orders(order_data,total_price,customer_id) VALUE
+('2025-07-01 10:00:00',50000,1);
+('2025-07-01 08:15:12', 250000, 1),
+('2025-07-01 09:45:25', 300000, 7),
+('2025-07-01 11:20:37', 450000, 8),
+('2025-07-01 12:05:49', 500000, 9),
+('2025-07-01 13:50:05', 600000, 10),
+('2025-07-01 15:10:18', 350000, 7),
+('2025-07-01 16:25:33', 750000, 7),
+('2025-07-01 17:55:41', 820000, 8),
+('2025-07-01 19:15:54', 900000, 9),
+('2025-07-01 20:40:09', 950000, 10)
+
+INSERT INTO Menu(name,price) VALUE
+('Osh',45000);
+('Somsa', 8000),
+('Shashlik', 25000),
+('Lag`mon', 30000),
+('Norin', 35000),
+('Manti', 20000),
+('Chuchvara', 22000),
+('Beshbarmoq', 40000),
+('Do`lma', 28000),
+('Qozon Kabob', 55000);
+
+INSERT INTO Order_Items(order_id,menu_id,quantity) VALUE
+(1,2,3);
