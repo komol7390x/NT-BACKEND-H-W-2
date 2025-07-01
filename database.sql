@@ -63,3 +63,13 @@ INSERT INTO Menu(name,price) VALUE
 
 INSERT INTO Order_Items(order_id,menu_id,quantity) VALUE
 (1,2,3);
+(3, 7, 2),
+(1, 4, 5),
+(10, 11, 1),
+(6, 2, 3),
+(8, 9, 4),
+(2, 5, 2),
+(9, 1, 3),
+(5, 8, 1),
+(7, 3, 5),
+(4, 6, 4);
