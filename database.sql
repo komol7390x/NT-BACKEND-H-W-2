@@ -1,6 +1,6 @@
 CREATE DATABASE IF NOT EXISTS Restoran;
 USE Restoran;
-
+--------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS Customers(
     id INT AUTO_INCREMENT PRIMARY KEY,
     full_name VARCHAR(100),
@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS Order_Items(
     FOREIGN KEY (menu_id) REFERENCES Menu(id),
     quantity INT
 );
-
+--------------------------------------------------------------------------
 INSERT INTO Customers(full_name,phone) VALUE
 ('Jamshid','+998998881155'),
 ('Aziz', '+998901234567'),
@@ -73,3 +73,33 @@ INSERT INTO Order_Items(order_id,menu_id,quantity) VALUE
 (5, 8, 1),
 (7, 3, 5),
 (4, 6, 4);
+----------------------------------------------------------------------
+mysql> SELECT * FROM Customers ORDER BY full_name ASC;
+
+SELECT full_name,SUM(quantity) AS total_meals FROM Customers 
+JOIN Orders ON Customers.id = Orders.customer_id
+JOIN Order_Items ON Orders.id = Order_Items.order_id
+GROUP BY Customers.id
+ORDER BY total_meals DESC
+LIMIT 1;
+
+
+SELECT * FROM Orders ORDER BY order_data DESC
+LIMIT 5;
+
+SELECT Customers.full_name,SUM(Orders.total_price) AS total_spent
+FROM Customers JOIN Orders ON Customers.id = Orders.customer_id
+GROUP BY Customers.id;
+
+SELECT
+    Customers.full_name,
+    Menu.name AS dish_name,
+    Menu.price,
+    Order_Items.quantity,
+    (Menu.price * Order_Items.quantity) AS total_cost
+FROM
+    Customers
+JOIN Orders ON Customers.id = Orders.customer_id
+JOIN Order_Items ON Orders.id = Order_Items.order_id
+JOIN Menu ON Menu.id = Order_Items.menu_id;
+
