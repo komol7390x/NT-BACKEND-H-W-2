@@ -62,7 +62,7 @@ INSERT INTO Menu(name,price) VALUES
 ('Qozon Kabob', 55000);
 
 INSERT INTO Order_Items(order_id,menu_id,quantity) VALUES
-(1,2,3);
+(1,2,3),
 (3, 7, 2),
 (1, 4, 5),
 (10, 11, 1),
