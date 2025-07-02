@@ -29,15 +29,15 @@ CREATE TABLE IF NOT EXISTS Order_Items(
     quantity INT
 );
 --------------------------------------------------------------------------
-INSERT INTO Customers(full_name,phone) VALUE
+INSERT INTO Customers(full_name,phone) VALUES
 ('Jamshid','+998998881155'),
 ('Aziz', '+998901234567'),
 ('Gulnora', '+998933456789'),
 ('Dilshod', '+998977654321'),
 ('Malika', '+998935551122');
 
-INSERT INTO Orders(order_data,total_price,customer_id) VALUE
-('2025-07-01 10:00:00',50000,1);
+INSERT INTO Orders(order_data,total_price,customer_id) VALUES
+('2025-07-01 10:00:00',50000,1),
 ('2025-07-01 08:15:12', 250000, 1),
 ('2025-07-01 09:45:25', 300000, 7),
 ('2025-07-01 11:20:37', 450000, 8),
@@ -47,10 +47,10 @@ INSERT INTO Orders(order_data,total_price,customer_id) VALUE
 ('2025-07-01 16:25:33', 750000, 7),
 ('2025-07-01 17:55:41', 820000, 8),
 ('2025-07-01 19:15:54', 900000, 9),
-('2025-07-01 20:40:09', 950000, 10)
+('2025-07-01 20:40:09', 950000, 10);
 
-INSERT INTO Menu(name,price) VALUE
-('Osh',45000);
+INSERT INTO Menu(name,price) VALUES
+('Osh',45000),
 ('Somsa', 8000),
 ('Shashlik', 25000),
 ('Lag`mon', 30000),
@@ -61,7 +61,7 @@ INSERT INTO Menu(name,price) VALUE
 ('Do`lma', 28000),
 ('Qozon Kabob', 55000);
 
-INSERT INTO Order_Items(order_id,menu_id,quantity) VALUE
+INSERT INTO Order_Items(order_id,menu_id,quantity) VALUES
 (1,2,3);
 (3, 7, 2),
 (1, 4, 5),
