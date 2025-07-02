@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS Restoran;
-USE Restoran;
+CREATE DATABASE IF NOT EXISTS Restoran2;
+USE Restoran2;
 --------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS Customers(
     id INT AUTO_INCREMENT PRIMARY KEY,
