@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS products(
 CREATE TABLE IF NOT EXISTS orders(
     id  INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     customers_id int,
-    FOREIGN KEY(customers_id) REFERENCES customers(id),
+    FOREIGN KEY(customers_id) REFERENCES customers(id) ON DELETE CASCADE,
     order_date DATE NOT NULL
 );
 
@@ -27,8 +27,8 @@ CREATE TABLE IF NOT EXISTS orders_items(
     id  INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     orders_id INT,
     product_id INT,
-    FOREIGN KEY(orders_id) REFERENCES orders(id),
-    FOREIGN KEY(product_id) REFERENCES products(id),
+    FOREIGN KEY(orders_id) REFERENCES orders(id) ON DELETE CASCADE,
+    FOREIGN KEY(product_id) REFERENCES products(id) ON DELETE CASCADE,
     quantity INT CHECK (quantity>0) NOT NULL
 );
 
