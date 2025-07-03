@@ -70,11 +70,11 @@ INSERT INTO orders_items(orders_id, product_id, quantity) VALUES
 
 -- @block
 SELECT c.fullname,COUNT(o.id) as total_order FROM orders_items oi JOIN orders o 
-ON o.id=oi.orders_id JOIN customers c ON o.customers_id=c.id  GROUP BY o.id
+ON o.id=oi.orders_id JOIN customers c ON o.customers_id=c.id  GROUP BY o.id;
 
 SELECT p.title,o.order_date,p.price FROM orders_items oi 
 INNER JOIN orders o ON oi.orders_id=o.id 
-INNER JOIN products p ON p.id= oi.product_id
+INNER JOIN products p ON p.id= oi.product_id;
 
 SELECT p.title,p.price,COUNT(p.id) AS total_products
 FROM orders_items oi INNER JOIN orders o ON oi.orders_id = o.id
@@ -82,14 +82,14 @@ INNER JOIN products p ON p.id = oi.product_id
 GROUP BY p.id, p.title, p.price
 ORDER BY p.id LIMIT 3;
 
-SELECT * FROM products WHERE stock_qty=0
+SELECT * FROM products WHERE stock_qty=0;
 
 -- @block
 UPDATE customers SET city='Xorazm' WHERE city='Fergana';
 UPDATE products SET price=1000  WHERE title='TV';
 
 -- @block
-DELETE FROM customers WHERE fullname='Ali Karimov'
+DELETE FROM customers WHERE fullname='Ali Karimov';
 
 -- @block
 ALTER TABLE customers ADD COLUMN email VARCHAR(32) NOT NULL DEFAULT '';
@@ -99,7 +99,7 @@ ALTER TABLE products ADD COLUMN catagory VARCHAR(32) NOT NULL ;
 SELECT c.id,c.fullname,o.order_date,p.title FROM orders_items oi 
 INNER JOIN orders o ON oi.orders_id=o.id 
 LEFT JOIN products p ON oi.product_id=p.id 
-RIGHT JOIN customers c ON o.customers_id=c.id
+RIGHT JOIN customers c ON o.customers_id=c.id;
 
 SELECT c.id, c.fullname FROM customers c
 LEFT JOIN orders o ON c.id = o.customers_id
@@ -114,7 +114,7 @@ SELECT c.fullname,SUM(p.price) as total_sum FROM orders_items oi
 INNER JOIN orders o ON oi.orders_id=o.id 
 LEFT JOIN products p ON oi.product_id=p.id 
 RIGHT JOIN customers c ON o.customers_id=c.id
-GROUP BY c.fullname  HAVING total_sum>=1200
+GROUP BY c.fullname  HAVING total_sum>=1200;
 
 -- @block
 SELECT * FROM customers WHERE city = 'Tashkent'
@@ -126,4 +126,12 @@ SELECT c.fullname,SUM(p.price) as total_spent FROM orders_items oi
 INNER JOIN orders o ON oi.orders_id=o.id 
 LEFT JOIN products p ON oi.product_id=p.id 
 RIGHT JOIN customers c ON o.customers_id=c.id
-GROUP BY c.fullname 
+GROUP BY c.fullname ;
+
+-- @block
+------------------------------------
+-- QOSHIMCHA QILINDI
+-- @block
+SELECT * FROM products WHERE price>0;
+SELECT phone FROM customers ;
+
