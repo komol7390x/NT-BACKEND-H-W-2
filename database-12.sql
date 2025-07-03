@@ -73,7 +73,7 @@ INSERT INTO orders_items(orders_id, product_id, quantity) VALUES
 (5, 1, 1);
 
 -----------------------------------------------------------------
-
+--3
 SELECT c.fullname,COUNT(o.id) as total_order FROM orders_items oi JOIN orders o 
 ON o.id=oi.orders_id JOIN customers c ON o.customers_id=c.id  GROUP BY o.id
 
@@ -89,10 +89,10 @@ GROUP BY p.id, p.title, p.price
 ORDER BY p.id LIMIT 3;
 
 SELECT * FROM products WHERE stock_qty=0
-
+--4
 UPDATE customers SET city='Xorazm' WHERE city='Fergana';
 UPDATE products SET price=1000  WHERE title='TV';
-
+--5
 -- @block
 SELECT * FROM products
 
