@@ -44,6 +44,7 @@ INSERT INTO customers (fullname, phone, city) VALUES
 
 INSERT INTO products (title, price, stock_qty) VALUES
 ('Laptop', 1200.00, 10),
+('TV', 1200.00, 0),
 ('Smartphone', 800.00, 25),
 ('Tablet', 450.00, 15),
 ('Headphones', 150.00, 50),
@@ -73,12 +74,31 @@ INSERT INTO orders_items(orders_id, product_id, quantity) VALUES
 
 -----------------------------------------------------------------
 
+SELECT c.fullname,COUNT(o.id) as total_order FROM orders_items oi JOIN orders o 
+ON o.id=oi.orders_id JOIN customers c ON o.customers_id=c.id  GROUP BY o.id
+
+SELECT p.title,o.order_date,p.price FROM orders_items oi 
+INNER JOIN orders o ON oi.orders_id=o.id 
+INNER JOIN products p ON p.id= oi.product_id
 
 
+SELECT p.title,p.price,COUNT(p.id) AS total_products
+FROM orders_items oi INNER JOIN orders o ON oi.orders_id = o.id
+INNER JOIN products p ON p.id = oi.product_id
+GROUP BY p.id, p.title, p.price
+ORDER BY p.id LIMIT 3;
 
+SELECT * FROM products WHERE stock_qty=0
+
+UPDATE customers SET city='Xorazm' WHERE city='Fergana';
+UPDATE products SET price=1000  WHERE title='TV';
 
 -- @block
-SELECT * FROM orders_items
+SELECT * FROM products
+
+
+
+
 
 
 -- @block
