@@ -55,10 +55,15 @@ INSERT INTO products(name,price,catagory) VALUES
 ('Standing Desk', 500.00, 'furniture'),
 ('Smartwatch S5', 250.00, 'electronics');
 
-
 INSERT INTO orders (customer_id, order_date) VALUES
-(1, '2025-06-01'),
-(2, '2025-06-03'),
+(1, '2025-06-10'),
+(7, '2025-06-01'),
+(8, '2025-06-03'),
+(1, '2025-06-10'),
+(6, '2025-06-01'),
+(5, '2025-06-03'),
+(9, '2025-06-01'),
+(10, '2025-06-03'),
 (1, '2025-06-10'),
 (3, '2025-06-12'),
 (1, '2025-06-15'),
@@ -87,5 +92,11 @@ INSERT INTO orders_items(order_id,product_id,quantity) VALUES
 (3, 4, 27)
 
 -- @block
+SELECT c.id,c.fullname,c.city,COUNT(o.id) 
+AS total_order FROM orders o 
+JOIN customers c on o.customer_id=c.id 
+GROUP BY c.id,c.fullname,c.city 
+ORDER BY total_order DESC LIMIT 1
 
-
+-- @block
+ 
