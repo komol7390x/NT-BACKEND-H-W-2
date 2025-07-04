@@ -94,17 +94,32 @@ SELECT c.id,c.fullname,c.city,COUNT(o.id)
 AS total_order FROM orders o 
 JOIN customers c ON o.customer_id=c.id 
 GROUP BY c.id,c.fullname,c.city 
-ORDER BY total_order DESC LIMIT 1
+ORDER BY total_order DESC LIMIT 1;
 
 SELECT c.city,AVG(order_count) AS avg_order_city
 FROM (SELECT customer_id,COUNT(*) AS order_count
 FROM orders GROUP BY customer_id) AS o 
 JOIN customers c ON o.customer_id=c.id
-GROUP BY c.city
+GROUP BY c.city;
 
 SELECT * FROM orders o
 RIGHT JOIN customers c ON o.customer_id=c.id
-WHERE o.id IS NULL
+WHERE o.id IS NULL;
+
+SELECT p.name,COUNT(p.name)*p.price AS total_sum 
+FROM orders_items oi 
+JOIN orders o ON oi.order_id=o.id
+JOIN products p ON oi.product_id=p.id
+GROUP BY p.name,p.price
+ORDER BY total_sum DESC LIMIT 1;
+
+SELECT o.id,p.name,o.order_date
+FROM orders_items oi 
+JOIN orders o ON oi.order_id=o.id
+JOIN products p ON oi.product_id=p.id
+ORDER BY order_date DESC LIMIT 1;
 
 -- @block
+
+
 
