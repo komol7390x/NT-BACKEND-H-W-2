@@ -57,11 +57,9 @@ INSERT INTO products(name,price,catagory) VALUES
 
 INSERT INTO orders (customer_id, order_date) VALUES
 (1, '2025-06-10'),
-(7, '2025-06-01'),
 (8, '2025-06-03'),
 (1, '2025-06-10'),
 (6, '2025-06-01'),
-(5, '2025-06-03'),
 (9, '2025-06-01'),
 (10, '2025-06-03'),
 (1, '2025-06-10'),
@@ -94,9 +92,19 @@ INSERT INTO orders_items(order_id,product_id,quantity) VALUES
 -- @block
 SELECT c.id,c.fullname,c.city,COUNT(o.id) 
 AS total_order FROM orders o 
-JOIN customers c on o.customer_id=c.id 
+JOIN customers c ON o.customer_id=c.id 
 GROUP BY c.id,c.fullname,c.city 
 ORDER BY total_order DESC LIMIT 1
 
+SELECT c.city,AVG(order_count) AS avg_order_city
+FROM (SELECT customer_id,COUNT(*) AS order_count
+FROM orders GROUP BY customer_id) AS o 
+JOIN customers c ON o.customer_id=c.id
+GROUP BY c.city
+
+SELECT * FROM orders o
+RIGHT JOIN customers c ON o.customer_id=c.id
+WHERE o.id IS NULL
+
 -- @block
- 
+
