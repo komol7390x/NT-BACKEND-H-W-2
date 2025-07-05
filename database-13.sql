@@ -140,6 +140,21 @@ SELECT * FROM orders WHERE order_date='2025-06-10'
 CREATE INDEX index_category ON products(catagory);
 SELECT * FROM products WHERE  catagory='electronics'
 
+EXPLAIN
+SELECT p.id,p.name
+FROM products p
+JOIN orders_items oi ON p.id = oi.product_id
+GROUP BY p.id, p.name;
+
+CREATE INDEX idx_orders_items_product_id
+ON orders_items(product_id);
+
+EXPLAIN
+SELECT p.id,p.name
+FROM products p
+JOIN orders_items oi ON p.id = oi.product_id
+GROUP BY p.id, p.name;
+
 -- @block
 
 
