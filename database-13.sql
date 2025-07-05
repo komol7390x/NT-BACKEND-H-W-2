@@ -46,14 +46,15 @@ INSERT INTO customers(fullname,phone,city) VALUES
 ('Nodira Abdurahmonova', '+998939393939', 'Tashkent');
 
 INSERT INTO products(name,price,catagory) VALUES
-('Smartphone A1', 450.00, 'electronics'),
 ('Laptop Pro 15', 1200.00, 'electronics'),
 ('Wireless Headphones', 150.00, 'electronics'),
 ('Office Chair', 200.00, 'furniture'),
 ('Coffee Maker', 80.00, 'appliances'),
 ('Tablet X10', 600.00, 'electronics'),
 ('Standing Desk', 500.00, 'furniture'),
-('Smartwatch S5', 250.00, 'electronics');
+('Smartwatch S5', 250.00, 'electronics'),
+('Smartphone Samsung s20', 350.00, 'electronics'),
+(' Samsung A22', 250.00, 'electronics');
 
 INSERT INTO orders (customer_id, order_date) VALUES
 (1, '2025-06-10'),
@@ -87,7 +88,7 @@ INSERT INTO orders_items(order_id,product_id,quantity) VALUES
 (6, 8, 11),
 (4, 1, 50),
 (2, 3, 4),
-(3, 4, 27)
+(3, 4, 27);
 
 -- @block
 SELECT c.id,c.fullname,c.city,COUNT(o.id) 
@@ -119,7 +120,29 @@ JOIN orders o ON oi.order_id=o.id
 JOIN products p ON oi.product_id=p.id
 ORDER BY order_date DESC LIMIT 1;
 
+SELECT * FROM products WHERE price > (SELECT AVG(price) FROM products)
+
+SELECT * FROM products ORDER BY price DESC LIMIT 1 OFFSET 1
+
 -- @block
+SELECT p.id,p.name,p.price
+FROM products p WHERE
+p.id NOT IN (
+SELECT oi.product_id
+FROM orders_items oi
+WHERE
+oi.product_id IS NOT NULL
+);
+
+CREATE INDEX index_order_date ON orders(order_date);
+SELECT * FROM orders WHERE order_date='2025-06-10'
+
+CREATE INDEX index_category ON products(catagory);
+SELECT * FROM products WHERE  catagory='electronics'
+
+-- @block
+
+
 
 
 
