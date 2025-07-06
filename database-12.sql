@@ -18,7 +18,8 @@ CREATE TABLE IF NOT EXISTS orders(
     customers_id int,
     FOREIGN KEY(customers_id) REFERENCES customers(id) ON DELETE CASCADE,
     order_date DATE NOT NULL
-) CREATE TABLE IF NOT EXISTS orders_items(
+);
+CREATE TABLE IF NOT EXISTS orders_items(
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     orders_id INT,
     product_id INT,
