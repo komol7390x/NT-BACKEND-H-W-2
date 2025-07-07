@@ -15,22 +15,32 @@ const read = async () => {
         return result[0]
     } catch (err) {
         console.log('Xatolik: ', err);
-        return [];
+        return;
     }
 };
 
-
 const write = async (name, age) => {
     try {
-        const sql = `INSERT INTO users(name,age)VAlUES (${name},${age})`
-        const result = await mysql.query(sql);
+        const sql = `INSERT INTO users(name,age)VAlUES (?,?);`
+        const [result] = await mysql.query(sql, [name, age]);
         return result[0]
     } catch (err) {
         console.log('Xatolik: ', err);
-        return [];
+        return;
+    }
+}
+
+const getId = async (id) => {
+    try {
+        const sql = `SELECT * FROM users WHERE id=?`
+        const result = await mysql.query(sql, [id]);
+        return result[0]
+    } catch (err) {
+        console.log('Xatolik: ', err);
+        return;
     }
 }
 
 export {
-    read, write
+    read, write, getId
 }
