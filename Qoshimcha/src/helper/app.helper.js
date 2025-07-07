@@ -41,6 +41,28 @@ const getId = async (id) => {
     }
 }
 
+const update = async (id, name, age) => {
+    try {
+        const sql = `UPDATE users SET name=?,age=? where id=?`
+        const result = await mysql.query(sql, [name, age, id]);
+        return result[0]
+    } catch (err) {
+        console.log('Xatolik: ', err);
+        return;
+    }
+}
+const deleteID = async (id) => {
+    try {
+        const sql = `DELETE FROM users WHERE id=?`
+        const result = await mysql.query(sql, [id]);
+        return result[0]
+    } catch (err) {
+        console.log('Xatolik: ', err);
+        return;
+    }
+}
+
+
 export {
-    read, write, getId
+    read, write, getId, update, deleteID
 }
