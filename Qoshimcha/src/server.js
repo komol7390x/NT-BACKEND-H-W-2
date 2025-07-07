@@ -3,4 +3,7 @@ import express from 'express';
 
 const server = express();
 server.use(express.json());
-server.
+server.use('/', Router);
+
+const PORT = 3003;
+server.listen(PORT, `Server is running Port:${PORT}`)
