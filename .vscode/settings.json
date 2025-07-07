@@ -9,8 +9,8 @@
             "server": "localhost",
             "port": 3306,
             "driver": "MySQL",
-            "name": "Town",
-            "database": "Town",
+            "name": "Transaction",
+            "database": "transform_money",
             "username": "root",
             "password": "12345"
         }
