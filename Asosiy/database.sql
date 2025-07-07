@@ -22,14 +22,14 @@ BEGIN
     SET balance=balance-money
     WHERE name='Ali';
 
-    SAVEPOINT after_debit;
+    SAVEPOINT add_money;
 
     SELECT balance INTO current_balance
     FROM accounts 
     WHERE name='Ali';
 
     IF current_balance<0 THEN
-        ROLLBACK TO after_debit;
+        ROLLBACK TO add_money;
 
     ELSE
         UPDATE accounts 
@@ -43,7 +43,7 @@ BEGIN
 END $$
 DELIMITER ;
 
-SET @x=200;
+SET @x=300;
 CALL transfer(@X);
 
 -- @block
