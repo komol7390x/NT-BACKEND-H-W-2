@@ -16,7 +16,7 @@ const connectMysql = async () => {
 
 const data = await connectMysql()
 // -------------------------------------------------------------------------------------------------------
-const writeDb = async (name, age, guruh) => {
+const writeDb = async (name = 'none', age = 22, guruh = 1) => {
     try {
         const std = 'INSERT INTO students(full_name,age,guruh_id) VALUES(?,?,?)'
         const slt = `SELECT * FROM students WHERE id=?`;
@@ -65,7 +65,7 @@ const readDb = async () => {
 }
 // -------------------------------------------------------------------------------------------------------
 
-const readDbById = async (id) => {
+const readDbById = async (id = 1) => {
     try {
         const std = 'SELECT * FROM students'
         const grh = 'SELECT * FROM guruh'
@@ -106,12 +106,10 @@ const readDbById = async (id) => {
 }
 // -------------------------------------------------------------------------------------------------------
 
-const updateDb = async (name, age, guruh_id, id) => {
+const updateDb = async (name = 'none', age = 20, guruh_id = 1, id = 1) => {
     try {
         const updateUser1 = 'UPDATE students SET full_name=?,age=?,guruh_id=? WHERE id=?'
         const resultUpdate = await data.query(updateUser1, [name, age, guruh_id, id]);
-        console.log(resultUpdate);
-
         const std = 'SELECT * FROM students'
         const grh = 'SELECT * FROM guruh'
         const [students] = await data.query(std,);
@@ -138,6 +136,7 @@ const updateDb = async (name, age, guruh_id, id) => {
 
         })
         return {
+            message: resultUpdate[0].changedRows,
             data: endResult
         }
     } catch (error) {

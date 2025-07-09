@@ -16,7 +16,7 @@ const connectMysql = async () => {
 
 const data = await connectMysql()
 // -------------------------------------------------------------------------------------------------------
-const writeDb = async (name) => {
+const writeDb = async (name = 'Fizika') => {
     try {
         const std = 'INSERT INTO guruh(name) VALUES(?)'
         const slt = `SELECT * FROM guruh WHERE id=?`;
@@ -104,7 +104,7 @@ const readDbById = async (id) => {
 }
 // -------------------------------------------------------------------------------------------------------
 
-const updateDb = async (name, id) => {
+const updateDb = async (name = `Fizika ${id}`, id) => {
     try {
         const updateUser1 = 'UPDATE guruh SET name=? WHERE id=?'
         const resultUpdate = await data.query(updateUser1, [name, id]);

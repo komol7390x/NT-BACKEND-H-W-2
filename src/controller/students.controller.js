@@ -83,14 +83,14 @@ const updateUser = async (req, res) => {
         const id = +req.params.id
         const { full_name, age, guruh_id } = req.body
         const result = await updateDb(full_name, age, guruh_id, id);
-        if (result.data.length != 0) {
+        if (result.message) {
             return res.status(200).json({
                 message: 'success',
                 data: result.data
             })
         } else {
             return res.status(404).json({
-                message: 'Not found user',
+                message: `Not found this user or already changa this ID: ${id}`,
                 data: []
             })
         }
