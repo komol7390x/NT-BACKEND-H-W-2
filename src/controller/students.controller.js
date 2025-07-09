@@ -4,17 +4,17 @@ const createUser = async (req, res) => {
     try {
         const { full_name, age, guruh_id } = req.body;
         const result = await writeDb(full_name, age, guruh_id)        
-        if (result.message=='Error') {
-            return res.status(404).json({
-                message: 'Not posted in mysql',
-                data: result
-            })
-        }        
+              
         if(result.message=='Done'){
             return res.status(201).json({
             message: "success",
             data: result.data
         })
+        }else if (result.message=='Error') {
+            return res.status(404).json({
+                message: 'Not posted in mysql',
+                data: result
+            })
         }
     } catch (error) {
         if (error) {
