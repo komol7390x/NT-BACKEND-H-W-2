@@ -1,10 +1,8 @@
-import { writeDb, readDb, readDbById, updateDb, deleteDb } from '../helper/students.help.js'
+import { writeDb, readDb, readDbById, updateDb, deleteDb } from '../helper/gurups.help.js'
 
 const createUser = async (req, res) => {
     try {
-        const { full_name, age, guruh_id } = req.body;
-        const result = await writeDb(full_name, age, guruh_id)
-
+        const result = await writeDb(req.body.name)
         if (result.message == 'Done') {
             return res.status(201).json({
                 message: "success",
@@ -81,16 +79,15 @@ const getByIdUser = async (req, res) => {
 const updateUser = async (req, res) => {
     try {
         const id = +req.params.id
-        const { full_name, age, guruh_id } = req.body
-        const result = await updateDb(full_name, age, guruh_id, id);
-        if (result.data.length != 0) {
+        const result = await updateDb(req.body.name, id);
+        if (result.message) {
             return res.status(200).json({
                 message: 'success',
                 data: result.data
             })
         } else {
             return res.status(404).json({
-                message: 'Not found user',
+                message: `Not found this user or already changa this ID: ${id}`,
                 data: []
             })
         }

@@ -5,8 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node --watch src/server-16.js",
-    "dev":"node --watch src/databases/app.database.js"
+    "start": "node --watch src/server-16.js"
   },
   "repository": {
     "type": "git",

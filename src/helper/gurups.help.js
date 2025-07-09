@@ -16,11 +16,11 @@ const connectMysql = async () => {
 
 const data = await connectMysql()
 // -------------------------------------------------------------------------------------------------------
-const writeDb = async (name, age, guruh) => {
+const writeDb = async (name) => {
     try {
-        const std = 'INSERT INTO students(full_name,age,guruh_id) VALUES(?,?,?)'
-        const slt = `SELECT * FROM students WHERE id=?`;
-        const [rows] = await data.query(std, [name, age, guruh]);
+        const std = 'INSERT INTO guruh(name) VALUES(?)'
+        const slt = `SELECT * FROM guruh WHERE id=?`;
+        const [rows] = await data.query(std, [name]);
         const result = await data.query(slt, [rows.insertId])
         return {
             message: 'Done',
@@ -42,12 +42,11 @@ const readDb = async () => {
         const grh = 'SELECT * FROM guruh'
         const [students] = await data.query(std);
         const [guruh] = await data.query(grh);
-        const endResult = students.map(item => {
+        const endResult = guruh.map(item => {
             return {
                 id: item.id,
-                name: item.full_name,
-                age: item.age,
-                guruh: guruh.filter(student => student.id == item.guruh_id)
+                name: item.name,
+                students: students.filter(student => student.guruh_id == item.id)
             }
         })
         return {
@@ -71,13 +70,13 @@ const readDbById = async (id) => {
         const grh = 'SELECT * FROM guruh'
         const [students] = await data.query(std);
         const [guruh] = await data.query(grh);
-        const result = students.map(item => {
+        const result = guruh.map(item => {
             if (item.id == id) {
                 return {
                     id: item.id,
-                    name: item.full_name,
+                    name: item.name,
                     age: item.age,
-                    guruh: guruh.filter(gurup => gurup.id == item.guruh_id)
+                    students: students.filter(gurup => gurup.guruh_id == item.id)
                 }
             }
             else {
@@ -90,7 +89,6 @@ const readDbById = async (id) => {
             if (item.id == id) {
                 return item
             }
-
         })
         return {
             data: endResult
@@ -106,23 +104,20 @@ const readDbById = async (id) => {
 }
 // -------------------------------------------------------------------------------------------------------
 
-const updateDb = async (name, age, guruh_id, id) => {
+const updateDb = async (name, id) => {
     try {
-        const updateUser1 = 'UPDATE students SET full_name=?,age=?,guruh_id=? WHERE id=?'
-        const resultUpdate = await data.query(updateUser1, [name, age, guruh_id, id]);
-        console.log(resultUpdate);
-
+        const updateUser1 = 'UPDATE guruh SET name=? WHERE id=?'
+        const resultUpdate = await data.query(updateUser1, [name, id]);
         const std = 'SELECT * FROM students'
         const grh = 'SELECT * FROM guruh'
         const [students] = await data.query(std,);
         const [guruh] = await data.query(grh,);
-        const result = students.map(item => {
+        const result = guruh.map(item => {
             if (item.id == id) {
                 return {
                     id: item.id,
-                    name: item.full_name,
-                    age: item.age,
-                    guruh: guruh.filter(gurup => gurup.id == item.guruh_id)
+                    name: item.name,
+                    students: students.filter(gurup => gurup.guruh_id == item.id)
                 }
             }
             else {
@@ -138,6 +133,7 @@ const updateDb = async (name, age, guruh_id, id) => {
 
         })
         return {
+            message: resultUpdate[0].changedRows,
             data: endResult
         }
     } catch (error) {
@@ -153,7 +149,7 @@ const updateDb = async (name, age, guruh_id, id) => {
 
 const deleteDb = async (id) => {
     try {
-        const deleteUser1 = 'DELETE FROM students WHERE id=?'
+        const deleteUser1 = 'DELETE FROM guruh WHERE id=?'
         const result = await data.query(deleteUser1, [id]);
         const endResult = result[0].affectedRows;
         return endResult
