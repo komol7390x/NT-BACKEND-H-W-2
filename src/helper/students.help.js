@@ -45,7 +45,7 @@ const readDb = async () => {
         const endResult = students.map(item => {
             return {
                 id: item.id,
-                name: item.full_name,
+                fullname: item.full_name,
                 age: item.age,
                 guruh: guruh.filter(student => student.id == item.guruh_id)
             }
@@ -75,7 +75,7 @@ const readDbById = async (id = 1) => {
             if (item.id == id) {
                 return {
                     id: item.id,
-                    name: item.full_name,
+                    fullname: item.full_name,
                     age: item.age,
                     guruh: guruh.filter(gurup => gurup.id == item.guruh_id)
                 }
@@ -118,7 +118,7 @@ const updateDb = async (name = 'none', age = 20, guruh_id = 1, id = 1) => {
             if (item.id == id) {
                 return {
                     id: item.id,
-                    name: item.full_name,
+                    fullname: item.full_name,
                     age: item.age,
                     guruh: guruh.filter(gurup => gurup.id == item.guruh_id)
                 }

@@ -1,6 +1,5 @@
 import express from 'express';
 import { config } from 'dotenv'
-import { createDatabase } from './databases/app.database.js'
 // createDatabase() //1-marta ishlatib komentriyaga obqoyish kerak
 
 import routersStudents from './routers/students.route.js'
