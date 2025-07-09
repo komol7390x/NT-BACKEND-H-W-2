@@ -17,7 +17,7 @@ const createNewUser = async (req, res) => {
         }
     }
 }
-const getAllUser = async (req, res) => {
+const getAllUser = async (_, res) => {
     try {
         const readUser = await read()
         return res.status(200).json({
