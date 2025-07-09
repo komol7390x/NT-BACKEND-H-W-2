@@ -1,5 +1,7 @@
 import {Router} from 'express'
-import {createUser,getAllUsers,getByIdUser,updateUser,deleteUser} from '../controller/app.controller.js'
+import {createUser,getAllUsers,getByIdUser,updateUser,deleteUser} from '../controller/students.controller.js'
+
+// getAllUsers()
 
 const routers=Router()
 routers

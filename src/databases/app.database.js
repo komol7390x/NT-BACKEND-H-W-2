@@ -1,4 +1,4 @@
-import {connectMysql} from '../helper/app.help.js'
+import {connectMysql} from '../helper/students.help.js'
 import { config } from 'dotenv';
 config()
 const mysqlServer=await connectMysql()
