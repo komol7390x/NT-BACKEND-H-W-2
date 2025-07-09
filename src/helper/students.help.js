@@ -15,26 +15,27 @@ const connectMysql = async () => {
 }
 
 const data = await connectMysql()
-
+// -------------------------------------------------------------------------------------------------------
 const writeDb = async (name, age, guruh) => {
     try {
         const std = 'INSERT INTO students(full_name,age,guruh_id) VALUES(?,?,?)'
         const slt = `SELECT * FROM students WHERE id=?`;
-        const [rows]= await data.query(std, [name, age, guruh]);
-        const result = await data.query(slt, [rows.insertId])            
+        const [rows] = await data.query(std, [name, age, guruh]);
+        const result = await data.query(slt, [rows.insertId])
         return {
-            message:'Done',
-            data:result[0]
+            message: 'Done',
+            data: result[0]
         }
     } catch (error) {
         if (error) {
             return {
-                message:'Error',
+                message: 'Error',
                 data: `Error database ${error.message}`
             }
         }
     }
 }
+// -------------------------------------------------------------------------------------------------------
 const readDb = async () => {
     try {
         const std = 'SELECT * FROM students'
@@ -53,23 +54,28 @@ const readDb = async () => {
     } catch (error) {
         if (error) {
             return {
-                message:'Error',
+                message: 'Error',
                 data: `Error database ${error.message}`
             }
         }
     }
 }
+// -------------------------------------------------------------------------------------------------------
+
 const readDbById = async () => {
 
 }
+// -------------------------------------------------------------------------------------------------------
 
 const updateDb = async () => {
 
 }
+// -------------------------------------------------------------------------------------------------------
 
 const deleteDb = async () => {
 
 }
+// -------------------------------------------------------------------------------------------------------
 
 export {
     writeDb, readDb, readDbById, updateDb, deleteDb, connectMysql
