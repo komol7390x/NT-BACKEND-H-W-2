@@ -17,6 +17,7 @@ const createNewUser = async (req, res) => {
         }
     }
 }
+
 const getAllUser = async (_, res) => {
     try {
         const readUser = await read()
