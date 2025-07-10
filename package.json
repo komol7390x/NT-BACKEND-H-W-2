@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/komol7390x/NT-BACKEND-H-W-2#readme",
   "dependencies": {
+    "dotenv": "^17.2.0",
     "express": "^5.1.0",
     "mongodb": "^6.17.0"
   }
