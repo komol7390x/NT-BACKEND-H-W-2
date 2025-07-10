@@ -16,6 +16,7 @@ const createUser = async (req, res) => {
         });
     }
 }
+// ---------------------------------------------------------------------------------------------------------------
 
 const getAllUsers = async (req, res) => {
     try {
@@ -39,20 +40,21 @@ const getAllUsers = async (req, res) => {
         });
     }
 }
+// ---------------------------------------------------------------------------------------------------------------
 
 const getUserbyId = async (req, res) => {
     try {
-        const result = await readDB()
-        if (result.length == 0) {
+        const result = await getById(req.params.id)        
+        if (!result) {
             return res.status(404).json({
                 statusCode: 404,
-                message: 'empty',
+                message: 'Not found user :(',
                 data: []
             })
         }
         return res.status(200).json({
             statusCode: 200,
-            message: 'success',
+            message: 'success2',
             data: result
         })
     } catch (error) {
@@ -62,14 +64,36 @@ const getUserbyId = async (req, res) => {
         });
     }
 }
+// ---------------------------------------------------------------------------------------------------------------
 
 const updateUser = async (req, res) => {
-
+ try {    
+        const result = await updateByid(req.params.id)    
+        if (result.message==0) {
+            return res.status(404).json({
+                statusCode: 404,
+                message: 'Not found user :(',
+                data: []
+            })
+        }
+        return res.status(200).json({
+            statusCode: 200,
+            message: 'success',
+            data: result.data
+        })
+    } catch (error) {
+        return res.status(500).json({
+            statusCode: 500,
+            message: error.message || 'Internal server error'
+        });
+    }
 }
+// ---------------------------------------------------------------------------------------------------------------
 
 const deleteUser = async (req, res) => {
 
 }
+// ---------------------------------------------------------------------------------------------------------------
 
 export {
     createUser, getAllUsers, getUserbyId, updateUser, deleteUser
