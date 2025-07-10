@@ -47,8 +47,8 @@ const updateByid=async(id,item)=>{
 
 const deleteById=async(id)=>{
     try {        
-        const endResult=await db.collection('user').findOne({_id:new ObjectId(id)})        
-        return endResult
+        const endResult=await db.collection('user').deleteOne({_id:new ObjectId(id)})        
+        return endResult.deletedCount
     } catch (error) {
         return `problem in helper file| problem with mongodb => ${error.message}`
     }

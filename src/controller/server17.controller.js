@@ -91,7 +91,25 @@ const updateUser = async (req, res) => {
 // ---------------------------------------------------------------------------------------------------------------
 
 const deleteUser = async (req, res) => {
-
+    try {    
+        const result = await deleteById(req.params.id)    
+        if (result==0) {
+            return res.status(404).json({
+                statusCode: 404,
+                message: 'Not found user :(',
+            })
+        }
+        return res.status(200).json({
+            statusCode: 200,
+            message: 'success',
+            data: {}
+        })
+    } catch (error) {
+        return res.status(500).json({
+            statusCode: 500,
+            message: error.message || 'Internal server error'
+        });
+    }
 }
 // ---------------------------------------------------------------------------------------------------------------
 
