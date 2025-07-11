@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node --watch src/server-16.js"
+    "start": "node --watch src/server-17.js"
   },
   "repository": {
     "type": "git",
@@ -19,8 +19,8 @@
   },
   "homepage": "https://github.com/komol7390x/NT-BACKEND-H-W-2#readme",
   "dependencies": {
-    "dotenv": "^17.1.0",
+    "dotenv": "^17.2.0",
     "express": "^5.1.0",
-    "mysql2": "^3.14.1"
+    "mongodb": "^6.17.0"
   }
 }
