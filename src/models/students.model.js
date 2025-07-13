@@ -10,7 +10,7 @@ const StudentSchema = new Schema({
         ref: 'Groups',
         required: true
     }
-}, { timestamps: true, versionKey: true })
+}, { timestamps: true })
 
 
 const Students = model('Students', StudentSchema);

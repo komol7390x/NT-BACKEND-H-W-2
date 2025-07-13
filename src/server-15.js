@@ -4,7 +4,7 @@ import { config } from 'dotenv'
 import { connectDB } from './database/products.database.js'  //databasaga ulanish
 
 import routerGroups from './routers/groups.route.js'
-
+import routerStudents from './routers/students.route.js'
 
 config()
 await connectDB()

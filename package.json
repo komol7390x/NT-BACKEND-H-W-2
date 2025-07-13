@@ -2,10 +2,9 @@
   "name": "nt-backend-2",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon src/server-15.js"
+    "start": "node --watch src/server-15.js"
   },
   "repository": {
     "type": "git",
