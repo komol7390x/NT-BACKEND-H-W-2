@@ -1,0 +1,276 @@
+{
+	"info": {
+		"_postman_id": "88e01d40-8a76-4a50-ba3d-8150c0ebb53b",
+		"name": "mongoose",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "46127988"
+	},
+	"item": [
+		{
+			"name": "groups",
+			"item": [
+				{
+					"name": "getGroups",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4050/groups",
+							"host": [
+								"localhost"
+							],
+							"port": "4050",
+							"path": [
+								"groups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createGroups",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\": \"Fors Tili\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4050/groups",
+							"host": [
+								"localhost"
+							],
+							"port": "4050",
+							"path": [
+								"groups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getGroupById",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4050/groups/687377504553d8678de8d61e",
+							"host": [
+								"localhost"
+							],
+							"port": "4050",
+							"path": [
+								"groups",
+								"687377504553d8678de8d61e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateGroup",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\"name\": \"Rus tili\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4050/groups/687379aef89905a14ba4fdc4",
+							"host": [
+								"localhost"
+							],
+							"port": "4050",
+							"path": [
+								"groups",
+								"687379aef89905a14ba4fdc4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteGroup",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:4050/groups/687379aef89905a14ba4fdc4",
+							"host": [
+								"localhost"
+							],
+							"port": "4050",
+							"path": [
+								"groups",
+								"687379aef89905a14ba4fdc4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "students",
+			"item": [
+				{
+					"name": "getAllStudents",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4050/students",
+							"host": [
+								"localhost"
+							],
+							"port": "4050",
+							"path": [
+								"students"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createStudents",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": \"ravshan_21\",\n    \"fullName\": \"Qodirov Ravshan\",\n    \"age\": 21,\n    \"totalScore\": \"5\",\n    \"groupID\":\"687377494553d8678de8d61c\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4050/students",
+							"host": [
+								"localhost"
+							],
+							"port": "4050",
+							"path": [
+								"students"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateStudents",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": \"alisher-33\",\n    \"fullName\": \"Qodirov Alisher\",\n    \"age\": 21,\n    \"totalScore\": \"5\",\n    \"groupID\":\"687377504553d8678de8d61e\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4050/students/68737b4df89905a14ba4fdde",
+							"host": [
+								"localhost"
+							],
+							"port": "4050",
+							"path": [
+								"students",
+								"68737b4df89905a14ba4fdde"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getStudentByID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": \"ravshan_21\",\n    \"fullName\": \"Qodirov Ravshan\",\n    \"age\": 21,\n    \"totalScore\": \"5\",\n    \"groupID\":\"687377494553d8678de8d61c\"\n}"
+						},
+						"url": {
+							"raw": "localhost:4050/students/68738007e20243ccb193b6dc",
+							"host": [
+								"localhost"
+							],
+							"port": "4050",
+							"path": [
+								"students",
+								"68738007e20243ccb193b6dc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteStudents",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:4050/students/68738007e20243ccb193b6dc",
+							"host": [
+								"localhost"
+							],
+							"port": "4050",
+							"path": [
+								"students",
+								"68738007e20243ccb193b6dc"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
