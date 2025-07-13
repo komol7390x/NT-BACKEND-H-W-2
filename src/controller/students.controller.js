@@ -92,7 +92,7 @@ export class StudentsController {
             return res.status(200).json({
                 statusCode: 200,
                 message: 'success',
-                data: product
+                data: student
             })
 
         } catch (error) {
@@ -102,7 +102,7 @@ export class StudentsController {
             })
         }
     }
-    async deleteProducts(req, res) {
+    async deleteStudents(req, res) {
         try {
             const id = req.params.id;
             if (!isValidObjectId(id)) {
@@ -111,7 +111,7 @@ export class StudentsController {
                     message: 'Invalid ObjectId',
                 })
             }
-            const product = await Products.findByIdAndDelete(id, req.body, { new: true })
+            await Students.findByIdAndDelete(id, req.body, { new: true })
             return res.status(200).json({
                 statusCode: 200,
                 message: 'success',
