@@ -5,7 +5,7 @@ export class StudentsController {
 
     async createStudents(req, res) {
         try {
-            const existsStudents = await Students.findOne({ name: req.body?.name });
+            const existsStudents = await Students.findOne({ user: req.body?.user });
             if (existsStudents) {
                 return res.status(409).json({
                     statusCode: 409,
@@ -28,7 +28,7 @@ export class StudentsController {
 
     async getAllStudents(_, res) {
         try {
-            const students = await Students.find().populate('Groups');
+            const students = await Students.find().populate('groupID');
             return res.status(200).json({
                 statusCode: 200,
                 message: 'success',
@@ -52,7 +52,7 @@ export class StudentsController {
                     message: 'Invalid ObjectId',
                 })
             }
-            const students = await Students.findById(id).populate('Groups');;
+            const students = await Students.findById(id).populate('groupID');;
             if (!students) {
                 return res.status(404).json({
                     statusCode: 404,
@@ -109,6 +109,13 @@ export class StudentsController {
                 return res.status(400).json({
                     statusCode: 400,
                     message: 'Invalid ObjectId',
+                })
+            }
+            const students = await Students.findById(id).populate('groupID');;
+            if (!students) {
+                return res.status(404).json({
+                    statusCode: 404,
+                    message: 'Students not found'
                 })
             }
             await Students.findByIdAndDelete(id, req.body, { new: true })

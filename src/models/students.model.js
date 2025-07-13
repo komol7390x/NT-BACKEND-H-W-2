@@ -5,11 +5,11 @@ const StudentSchema = new Schema({
     fullName: { type: String, minlength: 3, maxlength: 20 },
     age: { type: Number, max: 100, min: 0 },
     totalScore: { type: Number, min: 1, max: 5 },
-    groupID: {
+    groupID: [{
         type: Schema.Types.ObjectId,
         ref: 'Groups',
-        required: true
-    }
+        required: true,
+    }]
 }, { timestamps: true })
 
 
