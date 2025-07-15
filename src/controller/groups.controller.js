@@ -47,7 +47,7 @@ export class GroupsController {
             if (!isValidObjectId(id)) {
                 return res.status(404).json({
                     statusCode: 404,
-                    message: `this invalid ObjectID`
+                    message: `this invalid ObjectID ${id}`
                 })
             }            
             const result = await Groups.findById(id).populate('universityID').populate('allStudents')
@@ -83,6 +83,13 @@ export class GroupsController {
             if (!isValidObjectId(id)) {
                 return res.status(404).json({
                     statusCode: 404,
+                    message: `ninvalid ObjectID: ${id}`
+                })
+            }
+            const find = await Groups.findById(id)
+            if (!find) {
+                return res.status(404).json({
+                    statusCode: 404,
                     message: `no found this user ${id}`
                 })
             }
@@ -106,10 +113,10 @@ export class GroupsController {
             if (!isValidObjectId(id)) {
                 return res.status(404).json({
                     statusCode: 404,
-                    message: `no found this user ${id}`
+                    message: `invalid ObjectID: ${id}`
                 })
             }
-            const result = await Groups.findById(id).populate('universityID').populate('allStudents')
+            const result = await Groups.findById(id)
             if (!result) {
                 return res.status(404).json({
                     statusCode: 404,

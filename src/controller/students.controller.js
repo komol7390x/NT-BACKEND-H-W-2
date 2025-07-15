@@ -83,7 +83,7 @@ export class StudentsController {
             if (!isValidObjectId(id)) {
                 return res.status(404).json({
                     statusCode: 404,
-                    message: `no found this user ${id}`
+                    message: `invalid ObjectID ${id}`
                 })
             }
             const find = await Students.findById(id).populate('groupsID')
@@ -113,10 +113,10 @@ export class StudentsController {
             if (!isValidObjectId(id)) {
                 return res.status(404).json({
                     statusCode: 404,
-                    message: `no found this user ${id}`
+                    message: `invalid ObjectID ${id}`
                 })
             }
-            const result = await Students.findById(id).populate('groupsID')
+            const result = await Students.findById(id)
             if (!result) {
                 return res.status(404).json({
                     statusCode: 404,

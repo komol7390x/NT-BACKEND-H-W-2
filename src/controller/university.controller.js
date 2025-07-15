@@ -83,7 +83,7 @@ export class UniversityController {
             if (!isValidObjectId(id)) {
                 return res.status(404).json({
                     statusCode: 404,
-                    message: `no found this user ${id}`
+                    message: `invalid ObjectID: ${id}`
                 })
             }
              const find = await University.findById(id)
@@ -113,7 +113,7 @@ export class UniversityController {
             if (!isValidObjectId(id)) {
                 return res.status(404).json({
                     statusCode: 404,
-                    message: `no found this user ${id}`
+                    message: `invalid ObjectID: ${id}`
                 })
             }
             const result = await University.findById(id)
