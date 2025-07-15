@@ -1,26 +1,26 @@
 {
-  "name": "nt-backend-h-w-2",
+  "name": "nt-backend-2",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
+  "type":"module",
   "scripts": {
-    "start": "node --watch src/server-17.js"
+    "start":"node --watch ./src/server-18.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/komol7390x/NT-BACKEND-H-W-2.git"
+    "url": "git+https://github.com/komol7390x/NT-BACKEND-2.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/komol7390x/NT-BACKEND-H-W-2/issues"
+    "url": "https://github.com/komol7390x/NT-BACKEND-2/issues"
   },
-  "homepage": "https://github.com/komol7390x/NT-BACKEND-H-W-2#readme",
+  "homepage": "https://github.com/komol7390x/NT-BACKEND-2#readme",
   "dependencies": {
     "dotenv": "^17.2.0",
     "express": "^5.1.0",
-    "mongodb": "^6.17.0"
+    "mongoose": "^8.16.3"
   }
 }
