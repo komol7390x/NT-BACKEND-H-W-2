@@ -10,10 +10,11 @@ config()
 await connectDB()
 const server=express();
 server.use(express.json());
+server.use(express.static('public'))
 
 server.use('/category',routerCategory);
 server.use('/product',routerProduct);
 server.use('/review',routerReview);
-
+server.use('/',)
 const PORT=+process.env.PORT
 server.listen(PORT,()=>console.log('Server is runing PORT:',PORT))
