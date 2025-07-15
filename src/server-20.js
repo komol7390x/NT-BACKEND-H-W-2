@@ -11,7 +11,6 @@ config()
 await connectDB()
 const server=express();
 server.use(express.json());
-server.use(express.static('public'))
 
 server.use('/category',routerCategory);
 server.use('/product',routerProduct);
